@@ -1,0 +1,4 @@
+﻿  contextSwitchTest.cpp
+c:\users\chris\searches\documents\visual studio 2015\projects\contextswitchtest\contextswitchtest.cpp(51): warning C4101: 'x': unreferenced local variable
+  contextSwitchTest.vcxproj -> C:\Users\Chris\searches\documents\visual studio 2015\Projects\contextSwitchTest\Debug\contextSwitchTest.exe
+  contextSwitchTest.vcxproj -> C:\Users\Chris\searches\documents\visual studio 2015\Projects\contextSwitchTest\Debug\contextSwitchTest.pdb (Partial PDB)
