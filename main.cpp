@@ -18,21 +18,18 @@ int i = 0;
 
 void uselessFunct() {
 	introTime = chrono::high_resolution_clock::now();
-	i = 0;
-	i++;
-	//this_thread::sleep_for(chrono::milliseconds(1));
+	this_thread::sleep_for(chrono::milliseconds(1));
 	outroTime = chrono::high_resolution_clock::now();
 }
 
 int main() {
-	int numValues = 100000;
+	int numValues = 100;
 	switchData fourTimes[4];
 	for (int i = 0; i < 4; ++i)
 		fourTimes[i].setValues(numValues);
 	chrono::duration<double, nano> currTimes[4];
 	string stringName[4] = { "Full Time", "Between Switches", "Invoke Switch", "Return Switch" };
 	int numTimes = 4;
-	//int numTests = 1000;
 	for (int i = 0; i < numValues; ++i) {
 		
 		chrono::steady_clock::time_point start = chrono::high_resolution_clock::now();
@@ -43,10 +40,7 @@ int main() {
 		currTimes[1] = outroTime - introTime;
 		currTimes[2] = introTime - start;
 		currTimes[3] = end - outroTime;
-		for (int k = 0; k < 4; ++k) {
-			cout << fixed << currTimes[k].count() << " ";
-		}
-		cout << endl;
+
 		for (int j = 0; j < numTimes; ++j) {
 			fourTimes[j].addValue(currTimes[j]);
 			fourTimes[j].addToAccum(currTimes[j]);
@@ -55,7 +49,7 @@ int main() {
 		}
 	}
 	for (int i = 0; i < numTimes; ++i) {
-		fourTimes[i].resetIndex();
+		//fourTimes[i].resetIndex();
 		fourTimes[i].calcAvg();
 		fourTimes[i].calcStdDev();
 		cout << "Data for " << stringName[i] << endl;

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <chrono>
+#include <math.h>
 #include "switchData.h"
 
 using namespace std;
@@ -27,7 +28,7 @@ switchData::~switchData() {
 }
 
 void switchData::setValues(int numValues) {
-	testValues = new double[numValues];
+	testValues = new chrono::duration<double, nano>[numValues];
 	numTests = numValues;
 }
 
@@ -36,11 +37,11 @@ void switchData::addToAccum(chrono::duration<double, nano> current) {
 }
 
 void switchData::addToSAccum(chrono::duration<double, nano> current) {
-	stdDevAccum += current.count();
+	//stdDevAccum += current.count();
 }
 
 void switchData::addValue(chrono::duration<double, nano> current) {
-	testValues[currIndex] = current.count();
+	testValues[currIndex] = current;
 	currIndex++;
 }
 
@@ -60,15 +61,19 @@ void switchData::calcAvg() {
 
 void switchData::calcStdDev() {
 	for (int i = 0; i < numTests; ++i) {
-		stdDevAccum += pow((testValues[i] - average.count()), 2.0);
+		stdDevAccum += pow((testValues[i] - average).count(), 2.0);
 	}
 	stdDev = pow((stdDevAccum / numTests), 0.5);
 }
 
 void switchData::printData() {
-	cout << fixed << "Average: " << average.count() << endl;
-	cout << "Min: " << min.count() << endl;
-	cout << "Max: " << max.count() << endl;
-	cout << "Std Dev: " << stdDev << endl << endl;
+	cout << fixed << "Average: " << average.count() << " ns" << endl;
+	cout << "Min: " << min.count() << " ns" << endl;
+	cout << "Max: " << max.count() << " ns" << endl;
+	cout << "Std Dev: " << stdDev << " ns" << endl;
+	cout << "Std Dev is " << (stdDev / average.count()) * 100 << "% of average" << endl << endl;
 }
 
+void switchData::printTest() {
+	cout << fixed << testValues[currIndex].count() << "**" << endl;
+}

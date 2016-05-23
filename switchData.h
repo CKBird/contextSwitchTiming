@@ -4,6 +4,7 @@
 
 #include<iostream>
 #include<chrono>
+#include<math.h>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ public:
 	void addValue(chrono::duration<double, nano> current);
 	void checkMax(chrono::duration<double, nano> current);
 	void checkMin(chrono::duration<double, nano> current);
+	void printTest();
 	inline void resetIndex() { currIndex = 0; }
 	void calcAvg();
 	void calcStdDev();
@@ -28,10 +30,10 @@ private:
 	chrono::duration<double, nano> min;
 	chrono::duration<double, nano> max;
 	chrono::duration<double, nano> average;
-	chrono::duration<double, nano> stdDevAvg;
+	double stdDevAvg;
 	int numTests;
 	int currIndex;
-	double * testValues;
+	chrono::duration<double, nano> * testValues;
 	double stdDev;
 	double stdDevPerc;
 
